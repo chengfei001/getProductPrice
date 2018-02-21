@@ -1,6 +1,6 @@
-from requests import  request
+from requests import request, NullHandler
 from json import dumps
-import  sys
+import sys
 from PIL import Image
 import pytesseract
 from json import loads
@@ -27,16 +27,17 @@ f.write(response.content)
 f.close()
 # print(response.cookies.get('ASP.NET_SessionId'))
 cookies = 'ASP.NET_SessionId='+ response.cookies.get('ASP.NET_SessionId')
-#获取图片#
 
 
 #获取验证码结果
 im = Image.open('vcode.jpg')
+#转化为灰度图
 im.convert('L')
-
+# 图片转为字符串
 validataCode = pytesseract.image_to_string(im)
 code = validataCode
 # print(code)
+
 
 # code = input('验证码是什么？')
 #获取验证码结果
